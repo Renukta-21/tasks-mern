@@ -4,9 +4,7 @@ function Tasks() {
   return (
     <div>
       {tasks.length > 0 ? (
-        <p>{tasks.map(task=>(
-            <div>{task}</div>
-        ))}</p>
+        <TaskList tasks={tasks}/>
       ) : (
         <p>There is no tasks added yet, add one to get started!</p>
       )}
@@ -14,4 +12,11 @@ function Tasks() {
   )
 }
 
+const TaskList = ({tasks}) => (
+  <ul>
+    {tasks.map((task) => (
+      <li className="border-[1px] border-black my-3 py-3 flex justify-center">{task}</li>
+    ))}
+  </ul>
+)
 export default Tasks
