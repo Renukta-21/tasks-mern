@@ -1,10 +1,23 @@
 function Tasks() {
-  const tasks = ['task 1', 'task 2', 'task 3']
+  const tasks = [
+    {
+      title: 'task 1',
+      id: '1',
+    },
+    {
+      title: 'task 2',
+      id: '2',
+    },
+    {
+      title: 'task 3',
+      id: '3',
+    },
+  ]
 
   return (
     <div>
       {tasks.length > 0 ? (
-        <TaskList tasks={tasks}/>
+        <TaskList tasks={tasks} />
       ) : (
         <p>There is no tasks added yet, add one to get started!</p>
       )}
@@ -12,10 +25,15 @@ function Tasks() {
   )
 }
 
-const TaskList = ({tasks}) => (
+const TaskList = ({ tasks }) => (
   <ul>
     {tasks.map((task) => (
-      <li className="border-[1px] border-black my-3 py-3 flex justify-center">{task}</li>
+      <li
+        key={task.id}
+        className="border-[1px] border-black my-3 py-3 flex justify-center"
+      >
+        {task.title}
+      </li>
     ))}
   </ul>
 )
