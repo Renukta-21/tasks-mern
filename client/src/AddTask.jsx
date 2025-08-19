@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 function AddTask({ addTask }) {
-  
   const [taskInput, settaskInput] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     addTask(taskInput)
+    settaskInput('')
   }
   return (
     <div className="p-5">
@@ -21,6 +21,7 @@ function AddTask({ addTask }) {
             type="text"
             id="task_title"
             onChange={(e) => settaskInput(e.target.value)}
+            value={taskInput}
             className="border border-black rounded-lg w-full py-1 mt-4 focus:outline-0 text-center"
           />
           <button className="bg-blue-800 text-white rounded-xl w-full mt-4 py-2">

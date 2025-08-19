@@ -16,6 +16,10 @@ function App() {
     setTasks(newTasks)
     console.log(newTasks)
   }
+  const handleDelete=(taskId)=>{
+    const newTasks = tasks.filter(task=> task.id!==taskId)
+    setTasks(newTasks)
+  }
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white w-[90%] h-fit mt-10 p-12">
@@ -23,7 +27,7 @@ function App() {
           <h2 className="text-4xl font-bold mb-6">Task app</h2>
         </section>
         <AddTask addTask={addTask} />
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} handleDelete={handleDelete}/>
       </div>
     </div>
   )
