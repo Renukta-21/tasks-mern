@@ -1,16 +1,12 @@
 import { useState } from 'react'
 
-function AddTask({ tasks }) {
-  const [taskInput, settaskInput] = useState({
-    id: null,
-    title: '',
-  })
+function AddTask({ addTask }) {
+  
+  const [taskInput, settaskInput] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newTask = {...taskInput, id: Date.now()}
-    settaskInput(newTask)
-    console.log(newTask)
+    addTask(taskInput)
   }
   return (
     <div className="p-5">
@@ -24,9 +20,7 @@ function AddTask({ tasks }) {
           <input
             type="text"
             id="task_title"
-            onChange={(e) =>
-              settaskInput({ ...taskInput, title: e.target.value })
-            }
+            onChange={(e) => settaskInput(e.target.value)}
             className="border border-black rounded-lg w-full py-1 mt-4 focus:outline-0 text-center"
           />
           <button className="bg-blue-800 text-white rounded-xl w-full mt-4 py-2">

@@ -1,29 +1,28 @@
+import { useState } from 'react'
 import AddTask from './AddTask'
 import Tasks from './Tasks'
+import { v4 as uuidv4 } from 'uuid'
+useState
 
 function App() {
-  const tasks = [
-    {
-      title: 'task 1',
-      id: '1',
-    },
-    {
-      title: 'task 2',
-      id: '2',
-    },
-    {
-      title: 'task 3',
-      id: '3',
-    },
-  ]
+  const [tasks, setTasks] = useState([
+    { title: 'task 1', id: uuidv4() },
+    { title: 'task 2', id: uuidv4() },
+    { title: 'task 3', id: uuidv4() },
+  ])
 
+  const addTask = (title) => {
+    const newTasks = [...tasks, { title, id: uuidv4() }]
+    setTasks(newTasks)
+    console.log(newTasks)
+  }
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white w-[90%] h-fit mt-10 p-12">
         <section className="flex flex-col items-center">
           <h2 className="text-4xl font-bold mb-6">Task app</h2>
         </section>
-        <AddTask tasks={tasks} />
+        <AddTask addTask={addTask} />
         <Tasks tasks={tasks} />
       </div>
     </div>
