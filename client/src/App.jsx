@@ -2,7 +2,7 @@ import { useState } from 'react'
 import AddTask from './AddTask'
 import Tasks from './Tasks'
 import { v4 as uuidv4 } from 'uuid'
-useState
+
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -20,6 +20,9 @@ function App() {
     const newTasks = tasks.filter(task=> task.id!==taskId)
     setTasks(newTasks)
   }
+  const handleEdit = (taskId)=>{
+    console.log(taskId)
+  }
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white w-[90%] h-fit mt-10 p-12">
@@ -27,7 +30,7 @@ function App() {
           <h2 className="text-4xl font-bold mb-6">Task app</h2>
         </section>
         <AddTask addTask={addTask} />
-        <Tasks tasks={tasks} handleDelete={handleDelete}/>
+        <Tasks tasks={tasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
       </div>
     </div>
   )
