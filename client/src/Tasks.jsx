@@ -36,18 +36,31 @@ const TaskItem = ({ task, handleDelete, handleEdit }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState(task.title)
 
+  const toggleEdit = () => {
+    if (isEditing) {
+      setIsEditing(false)
+      handleEdit(task.id, editText)
+    } else {
+      setIsEditing(true)
+    }
+  }
   return (
     <li className="border-[1px] border-black my-3 py-3 flex justify-between px-10">
-      {isEditing ? <input className='border-[1px] border-black px-5' value={editText} onChange={e=> setEditText(e.target.value)}/> : <span>{task.title}</span>}
+      {isEditing ? (
+        <input
+          className="border-[1px] border-black px-5"
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+        />
+      ) : (
+        <span>{task.title}</span>
+      )}
 
       <div className="flex gap-5">
         <span className="cursor-pointer" onClick={() => handleDelete(task.id)}>
           <FaTrash />
         </span>
-        <span
-          className="cursor-pointer"
-          onClick={() => setIsEditing(!isEditing)}
-        >
+        <span className="cursor-pointer" onClick={toggleEdit}>
           <FaPencilAlt />
         </span>
       </div>

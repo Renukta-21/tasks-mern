@@ -20,8 +20,10 @@ function App() {
     const newTasks = tasks.filter(task=> task.id!==taskId)
     setTasks(newTasks)
   }
-  const handleEdit = (taskId)=>{
-    console.log(taskId)
+  const handleEdit = (taskId, title)=>{
+    const updatedList = tasks.map(task=> task.id !== taskId ? task : {title, ...task})
+    setTasks(updatedList)
+    console.log(updatedList)
   }
   return (
     <div className="min-h-screen flex justify-center">
