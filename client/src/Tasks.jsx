@@ -23,6 +23,7 @@ const TaskList = ({ tasks, handleDelete, handleEdit }) => (
   <ul>
     {tasks.map((task) => (
       <TaskItem
+        key={task.id}
         task={task}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
@@ -32,22 +33,21 @@ const TaskList = ({ tasks, handleDelete, handleEdit }) => (
 )
 
 const TaskItem = ({ task, handleDelete, handleEdit }) => {
-  const [isEditing, setIsEditing] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [editText, setEditText] = useState(task.title)
 
   return (
-    <li
-      key={task.id}
-      className="border-[1px] border-black my-3 py-3 flex justify-between px-10"
-    >
-      {task.id===isEditing?(
-        <input/>
-      ):<span>{task.title}</span>}
+    <li className="border-[1px] border-black my-3 py-3 flex justify-between px-10">
+      {isEditing ? <input className='border-[1px] border-black px-5' value={editText} onChange={e=> setEditText(e.target.value)}/> : <span>{task.title}</span>}
 
       <div className="flex gap-5">
         <span className="cursor-pointer" onClick={() => handleDelete(task.id)}>
           <FaTrash />
         </span>
-        <span className="cursor-pointer" onClick={() => handleEdit(task.id)}>
+        <span
+          className="cursor-pointer"
+          onClick={() => setIsEditing(!isEditing)}
+        >
           <FaPencilAlt />
         </span>
       </div>
