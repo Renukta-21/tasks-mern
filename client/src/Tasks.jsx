@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { FaTrash, FaPencilAlt } from 'react-icons/fa'
+import { FaTrash, FaPencilAlt, FaCheckSquare } from 'react-icons/fa'
 
-function Tasks({ tasks, handleDelete, handleEdit }) {
+function Tasks({ tasks, handleDelete, handleEdit,handleCheckToggle }) {
   return (
     <div>
       {tasks.length > 0 ? (
@@ -9,6 +9,7 @@ function Tasks({ tasks, handleDelete, handleEdit }) {
           tasks={tasks}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
+          handleCheckToggle={handleCheckToggle}
         />
       ) : (
         <p className="text-center">
@@ -19,7 +20,7 @@ function Tasks({ tasks, handleDelete, handleEdit }) {
   )
 }
 
-const TaskList = ({ tasks, handleDelete, handleEdit }) => (
+const TaskList = ({ tasks, handleDelete, handleEdit, handleCheckToggle }) => (
   <ul>
     {tasks.map((task) => (
       <TaskItem
@@ -27,12 +28,13 @@ const TaskList = ({ tasks, handleDelete, handleEdit }) => (
         task={task}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        handleCheckToggle={handleCheckToggle}
       />
     ))}
   </ul>
 )
 
-const TaskItem = ({ task, handleDelete, handleEdit }) => {
+const TaskItem = ({ task, handleDelete, handleEdit, handleCheckToggle }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState(task.title)
 
@@ -53,7 +55,12 @@ const TaskItem = ({ task, handleDelete, handleEdit }) => {
           onChange={(e) => setEditText(e.target.value)}
         />
       ) : (
-        <span>{task.title}</span>
+        <div className='flex items-center gap-5 '>
+          <input type='checkbox' className='scale-[1.5] accent-green-600' checked={task.completed} onChange={()=>handleCheckToggle(task.id)}/>
+          <span className={task.completed ? 'line-through' : undefined}>
+            {task.title}
+          </span>
+        </div>
       )}
 
       <div className="flex gap-5">

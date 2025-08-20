@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 function App() {
   const [tasks, setTasks] = useState([
     { title: 'task 1', id: uuidv4(), completed: true },
-    { title: 'task 2', id: uuidv4(), completed: true },
+    { title: 'task 2', id: uuidv4(), completed: false },
     { title: 'task 3', id: uuidv4(), completed: true },
   ])
 
@@ -27,6 +27,12 @@ function App() {
     console.log(updatedList)
   }
 
+  const handleCheckToggle=(taskId)=>{
+    const updatedList = tasks.map(task=> task.id!==taskId?task:{...task, completed:!task.completed})
+    setTasks(updatedList)
+    console.log(updatedList)
+  }
+
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white w-[90%] h-fit mt-10 p-12">
@@ -38,6 +44,7 @@ function App() {
           tasks={tasks}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
+          handleCheckToggle={handleCheckToggle}
         />
       </div>
     </div>
