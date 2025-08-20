@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AddTask from './AddTask'
 import Tasks from './Tasks'
 import { v4 as uuidv4 } from 'uuid'
+import TasksOptions from './TasksOptions'
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -11,9 +12,8 @@ function App() {
   ])
 
   const addTask = (title) => {
-    const newTasks = [...tasks, { title, id: uuidv4() }]
+    const newTasks = [...tasks, { title, id: uuidv4(), completed:false } ]
     setTasks(newTasks)
-    console.log(newTasks)
   }
   const handleDelete = (taskId) => {
     const newTasks = tasks.filter((task) => task.id !== taskId)
@@ -27,10 +27,16 @@ function App() {
     console.log(updatedList)
   }
 
-  const handleCheckToggle=(taskId)=>{
-    const updatedList = tasks.map(task=> task.id!==taskId?task:{...task, completed:!task.completed})
+  const handleCheckToggle = (taskId) => {
+    const updatedList = tasks.map((task) =>
+      task.id !== taskId ? task : { ...task, completed: !task.completed }
+    )
     setTasks(updatedList)
     console.log(updatedList)
+  }
+  const handleDeleteCompleted=()=>{
+    const updatedList = tasks.filter(task=>task.completed!==true)
+    setTasks(updatedList)
   }
 
   return (
@@ -40,6 +46,7 @@ function App() {
           <h2 className="text-4xl font-bold mb-6">Task app</h2>
         </section>
         <AddTask addTask={addTask} />
+        <TasksOptions handleDeleteCompleted={handleDeleteCompleted} />
         <Tasks
           tasks={tasks}
           handleDelete={handleDelete}
