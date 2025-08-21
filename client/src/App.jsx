@@ -12,7 +12,7 @@ function App() {
   ])
 
   const addTask = (title) => {
-    const newTasks = [...tasks, { title, id: uuidv4(), completed:false } ]
+    const newTasks = [...tasks, { title, id: uuidv4(), completed: false }]
     setTasks(newTasks)
   }
   const handleDelete = (taskId) => {
@@ -24,7 +24,6 @@ function App() {
       task.id !== taskId ? task : { title, ...task }
     )
     setTasks(updatedList)
-    console.log(updatedList)
   }
 
   const handleCheckToggle = (taskId) => {
@@ -34,11 +33,15 @@ function App() {
     setTasks(updatedList)
     console.log(updatedList)
   }
-  const handleDeleteCompleted=()=>{
-    const updatedList = tasks.filter(task=>task.completed!==true)
+  const handleDeleteCompleted = () => {
+    const updatedList = tasks.filter((task) => task.completed !== true)
     setTasks(updatedList)
   }
 
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === 'completed') return task.completed === true
+    if (filter === 'pending') return task.completed === false
+  })
   return (
     <div className="min-h-screen flex justify-center">
       <div className="bg-white w-[90%] h-fit mt-10 p-12">
@@ -46,7 +49,10 @@ function App() {
           <h2 className="text-4xl font-bold mb-6">Task app</h2>
         </section>
         <AddTask addTask={addTask} />
-        <TasksOptions handleDeleteCompleted={handleDeleteCompleted} />
+        <TasksOptions
+          handleDeleteCompleted={handleDeleteCompleted}
+          handleFilter={handleFilter}
+        />
         <Tasks
           tasks={tasks}
           handleDelete={handleDelete}
