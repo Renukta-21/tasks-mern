@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import TasksOptions from './TasksOptions'
 
 function App() {
+  const [filter, setFilter] = useState('all')
   const [tasks, setTasks] = useState([
     { title: 'task 1', id: uuidv4(), completed: true },
     { title: 'task 2', id: uuidv4(), completed: false },
@@ -38,9 +39,12 @@ function App() {
     setTasks(updatedList)
   }
 
+  const handleFilter = (newFilter)=> setFilter(newFilter)
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'completed') return task.completed === true
     if (filter === 'pending') return task.completed === false
+    return true
   })
   return (
     <div className="min-h-screen flex justify-center">
@@ -54,7 +58,7 @@ function App() {
           handleFilter={handleFilter}
         />
         <Tasks
-          tasks={tasks}
+          tasks={filteredTasks}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleCheckToggle={handleCheckToggle}

@@ -10,7 +10,7 @@ function TasksOptions({ handleDeleteCompleted, handleFilter }) {
         Delete completed
       </button>
       <select
-        className="border border-blue-600 rounded-lg text-center outline-0 cursor-pointer"
+        className="border border-blue-600 rounded-lg text-center outline-0 cursor-pointer px-2"
         onChange={handleFilterChange}
       >
         <option value="all">All tasks</option>
