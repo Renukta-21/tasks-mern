@@ -1,6 +1,6 @@
 const express = require('express')
 const {v4} = require('uuid')
-const cors = require('cors')
+
 const app = express()
 
 const PORT = 3001
@@ -18,7 +18,7 @@ const mainGreeting = `
   <li><strong>/tasks </strong> Retrieve all tasks</li>
   </ul>
 `
-app.use(cors())
+
 app.get('', (req, res) => {
   console.log('request a ruta principal')
   res.send(mainGreeting)
